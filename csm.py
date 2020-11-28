@@ -2,18 +2,18 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 customerDB = [{
-	'regID' = '1779321',
-	'name' = 'Spriha',
-	'email' = 'spriha27@gmail.com',
-	'address' = 'god knows',
-	'contactno' = '9876543210'
+	'regID': '1779321',
+	'name': 'Spriha',
+	'email': 'spriha27@gmail.com',
+	'address': 'god knows',
+	'contactno': '9876543210'
 	},
 	{
-	'regID' = '1234567',
-	'name' = 'Dracula',
-	'email' = 'blood@gmail.com',
-	'address' = 'Dark Caves',
-	'contactno' = '1122334455'
+	'regID': '1234567',
+	'name': 'Dracula',
+	'email': 'blood@gmail.com',
+	'address': 'Dark Caves',
+	'contactno': '1122334455'
 	},
 ]
 
@@ -40,7 +40,7 @@ def customer_registration():
 
 @app.route('/customer_set_password')
 def customer_set_password():
-    return render_template('customer_set_password.html', customers = customerDB)
+    return render_template('customer_set_password.html')
 
 @app.route('/manager_login')
 def manager_login():
@@ -48,4 +48,4 @@ def manager_login():
 
 @app.route('/manager_view_details')
 def manager_view_details():
-    return render_template('manager_view_details.html')
+    return render_template('manager_view_details.html', customers = customerDB)
