@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Customer Management System</title>
+</head>
+<body>
+
+	{% for customer in customers%}
+		<h3> {{customer.redID}} - {{ customer. name}} </h3>
+		<p> {{ customer.email}} </p>
+		<p> {{ customer.address}} </p>
+		<p> {{ customer.contact}} </p>
+	{% endfor%}
+</body>
+</html>
