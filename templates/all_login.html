@@ -1,9 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Customer Management System</title>
-</head>
-<body>
-	<h1>All login page</h1>
-</body>
-</html>
+{% extends "layout.html" %}
+{% block content %}
+    <br>
+    <h1>{{message}}</h1><br>
+
+    <div class="container">
+        <div class="float-left">
+            <h1>Customer</h1>
+            <a href="{{ url_for('customer_options')}}"><img src="static/user.png" class="img-rounded"></a>
+        </div>
+
+        <div class="float-right">
+            <h1>Manager</h1>
+            <a href="{{ url_for('manager_login')}}"><img src="static/admin.png" class="img-rounded"></a>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+app.config['SECRET_KEY'] = '6364b380cc27fc761cedcbc05b9ad119'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 
@@ -15,7 +15,8 @@ class Existing_user(db.Model):
     email = db.Column(db.String(120), nullable=False)
     address = db.Column(db.String(120), nullable=False)
     contactno = db.Column(db.Integer, nullable=False)
-    # password = db.Column(db.String(60), nullable=False)
+    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    password = db.Column(db.String(60), nullable=False)
 
     def __repr__(self):
         return f"Existing_user('{self.username}', '{self.email}')"
@@ -26,12 +27,13 @@ class Deleted_user(db.Model):
     email = db.Column(db.String(120), nullable=False)
     address = db.Column(db.String(120), nullable=False)
     contactno = db.Column(db.Integer, nullable=False)
-    # password = db.Column(db.String(60), nullable=False)
+    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')##########
+    password = db.Column(db.String(60), nullable=False)
 
     def __repr__(self):
         return f"Deleted_user('{self.username}', '{self.email}')"
 
-
+######################################
 class Manager(db.Model):
     email = db.Column(db.String(120), primary_key=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
@@ -78,15 +80,21 @@ customerDB = [{
 	'contactno': '1122334455'
 	},
 ]
+#################################
+message = 'Login'
 
 @app.route('/')
 @app.route('/all_login')
 def all_login():
-    return render_template('all_login.html')
+    return render_template('all_login.html',title="Intro",message=message)
+
+@app.route("/about")
+def about():
+    return render_template("about.html",title="About")
 
 @app.route('/customer_options')
 def customer_options():
-    return render_template('customer_options.html')
+    return render_template('customer_options.html', title="Customer Options")
 
 @app.route('/customer_view_profile')
 def customer_view_profile():
@@ -96,7 +104,7 @@ def customer_view_profile():
 def customer_login():
 	form = customer_login_form()
 	if form.validate_on_submit():
-		if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+		if form.email.data == 'customer@tcs.com' and form.password.data == 'password':
 			flash('You have been logged in!', 'success')
 			return redirect(url_for('customer_view_profile'))
 		else:
@@ -123,13 +131,15 @@ def manager_view_details():
 def manager_login():
 	form = manager_login_form()
 	if form.validate_on_submit():
-		if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+		if form.email.data == 'manager@tcs.com' and form.password.data == 'password':
 			flash('You have been logged in!', 'success')
 			return redirect(url_for('manager_view_details'))
 		else:
 			flash('Login Unsuccessful. Please check username and password', 'danger')
 	return render_template('manager_login.html', title='Manager_Login', form=form)
 
+if __name__=='__main__':
+    app.run(debug=True)
 
 # @app.route("/register", methods=['GET', 'POST'])
 # def register():
