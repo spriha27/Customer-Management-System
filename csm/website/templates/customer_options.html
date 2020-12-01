@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    <br>
+    <div class="container">
+        <div class="float-left pt-3">
+            <p>Already Have An Account</p>
+            <a href="{{ url_for('customer_login')}}"><img src="static/signin.png" class="img-rounded"></a><br>
+        </div>
+
+        <div class="float-right pt-3">
+            <p>Need An Account</p>
+            <a href="{{ url_for('customer_registration')}}""><img src="static/signup.png" class="img-rounded"></a>
+        </div>
+    </div>
+{% endblock content %}
